@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded',() => {
             cards[optionOneId].setAttribute('src','Images/White Background.png');
             cards[optionTwoId].setAttribute('src','Images/White Background.png');
             cardsMatched.push(cardsChosen);
+            cards[optionOneId].removeEventListener('click',flipcard);
+            cards[optionTwoId].removeEventListener('click',flipcard);
         }
         else{
             cards[optionOneId].setAttribute('src','Images/CardBack.png');
@@ -107,7 +109,14 @@ document.addEventListener('DOMContentLoaded',() => {
         cardsChosen.push(cardArray[cardId].name);
         cardsChosenId.push(cardId);
         this.setAttribute('src',cardArray[cardId].Image);
+        
         if(cardsChosen.length === 2){
+            if(cardsChosenId[0] === cardsChosenId[1]){
+                alert('You are picking the same card! Please choose a different card!');
+                cardsChosenId.pop();
+                cardsChosen.pop();
+                return;
+            }
             setTimeout(checkForMatch, 500)
         }
     }
